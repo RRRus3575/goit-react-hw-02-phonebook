@@ -6,7 +6,7 @@ export const Input = ({ label, name, value, pattern, type, onChange }) => {
         onChange={onChange}
         name={name}
         value={value}
-        pattern={pattern}
+        // pattern={pattern}
         type={type}
         required
       />

@@ -1,55 +1,72 @@
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
+import { Form } from './Form/Form';
 import { Input } from './inputs/Input';
+import { ContactRender } from './ContactRender/ConstactRender';
+import { getDefaultNormalizer } from '@testing-library/react';
 
 export class App extends Component {
   state = {
-    contacts: [],
-    name: '',
-  };
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
+    filter: '',
+  };
+  handleDelete = nameEl => {
+    // console.log(nameEl);
+    // let index = this.state.contacts.indexOf(nameEl);
+    console.log(nameEl);
+    this.setState(prev => {
+      return { contacts: prev.contacts.filter(({ id }) => id !== nameEl) };
+    });
+  };
+  handleSubmit = (name, number) => {
+    if (this.state.contacts.find(el => el.name === name)) {
+      alert(`${name} is alredy in contacts`);
+    }
+
+    console.log(name, number);
+    this.setState(prev => {
+      return {
+        contacts: prev.contacts.concat({
+          name: name,
+          number: number,
+          id: uniqid(),
+        }),
+      };
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.state.name);
-    const { name } = this.state;
-    this.setState(prev => {
-      console.log(prev.contacts.concat(name, uniqid()));
-      return { contacts: prev.contacts };
+  handleSearch = ({ target: { value: filter } }) => {
+    this.setState({
+      filter,
     });
   };
 
   render() {
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        <form onSubmit={this.handleSubmit} autoComplete="off">
+      <div>
+        <Form onSubmit={this.handleSubmit} />
+        <div>
+          <h2>Contacts</h2>
           <Input
-            onChange={this.handleChange}
-            value={this.state.name}
+            onChange={this.handleSearch}
+            value={this.state.filter}
             type={'text'}
-            name={'name'}
-            pattern={
-              "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            }
-            label={'Name'}
-            required
+            name={'filter'}
           />
-          <button type="submit">Add contact</button>
-        </form>
+          <ul>
+            <ContactRender
+              contacts={this.state.contacts}
+              search={this.state.filter}
+              onClick={this.handleDelete}
+            />
+          </ul>
+        </div>
       </div>
     );
   }
