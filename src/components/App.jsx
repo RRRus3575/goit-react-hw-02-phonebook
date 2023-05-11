@@ -3,7 +3,6 @@ import uniqid from 'uniqid';
 import { Form } from './Form/Form';
 import { Input } from './inputs/Input';
 import { ContactRender } from './ContactRender/ConstactRender';
-import { getDefaultNormalizer } from '@testing-library/react';
 
 export class App extends Component {
   state = {
@@ -17,8 +16,6 @@ export class App extends Component {
     filter: '',
   };
   handleDelete = nameEl => {
-    // console.log(nameEl);
-    // let index = this.state.contacts.indexOf(nameEl);
     console.log(nameEl);
     this.setState(prev => {
       return { contacts: prev.contacts.filter(({ id }) => id !== nameEl) };
@@ -49,23 +46,39 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        <Form onSubmit={this.handleSubmit} />
+      <div
+        style={{
+          margin: 50,
+        }}
+      >
         <div>
-          <h2>Contacts</h2>
-          <Input
-            onChange={this.handleSearch}
-            value={this.state.filter}
-            type={'text'}
-            name={'filter'}
-          />
-          <ul>
-            <ContactRender
-              contacts={this.state.contacts}
-              search={this.state.filter}
-              onClick={this.handleDelete}
+          <h1>Phonebook</h1>
+          <Form onSubmit={this.handleSubmit} />
+        </div>
+        <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
+            <h2>Contacts</h2>
+            <Input
+              onChange={this.handleSearch}
+              value={this.state.filter}
+              type={'text'}
+              name={'filter'}
+              label={'Find contacts by name'}
             />
-          </ul>
+            <ul>
+              <ContactRender
+                contacts={this.state.contacts}
+                search={this.state.filter}
+                onClick={this.handleDelete}
+              />
+            </ul>
+          </div>
         </div>
       </div>
     );

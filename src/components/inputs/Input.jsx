@@ -1,3 +1,5 @@
+import css from './Input.module.css';
+
 export const Input = ({ label, name, value, pattern, type, onChange }) => {
   return (
     <label>

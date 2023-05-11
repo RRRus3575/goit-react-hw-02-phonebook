@@ -1,5 +1,5 @@
 import { Component } from 'react';
-
+import css from './Form.module.css';
 import { Input } from '../inputs/Input';
 
 export class Form extends Component {
@@ -24,8 +24,9 @@ export class Form extends Component {
   };
 
   render() {
+    const { form, submit } = css;
     return (
-      <form onSubmit={this.handleSubmit} autoComplete="off">
+      <form onSubmit={this.handleSubmit} autoComplete="off" className={form}>
         <Input
           onChange={this.handleChange}
           type={'text'}
@@ -44,7 +45,9 @@ export class Form extends Component {
           label={'Number'}
           required
         />
-        <button type="submit">Add contact</button>
+        <button type="submit" className={submit}>
+          Add contact
+        </button>
       </form>
     );
   }
