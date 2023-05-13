@@ -1,8 +1,8 @@
-input {
+.input {
   display: block;
   margin-top: 10px;
 }
-label {
+.label {
   margin-bottom: 20px;
   font-weight: 500;
 }

@@ -31,7 +31,6 @@ export class Form extends Component {
           onChange={this.handleChange}
           type={'text'}
           name={'name'}
-          pattern={"^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"}
           label={'Name'}
           required
         />
@@ -39,9 +38,6 @@ export class Form extends Component {
           onChange={this.handleChange}
           type={'tel'}
           name={'number'}
-          pattern={
-            '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}'
-          }
           label={'Number'}
           required
         />
