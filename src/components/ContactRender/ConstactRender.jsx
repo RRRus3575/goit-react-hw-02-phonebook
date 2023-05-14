@@ -29,4 +29,5 @@ export class ContactRender extends Component {
 ContactRender.propTypes = {
   contacts: PropTypes.array.isRequired,
   search: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
