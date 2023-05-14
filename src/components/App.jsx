@@ -16,7 +16,6 @@ export class App extends Component {
     filter: '',
   };
   handleDelete = nameEl => {
-    console.log(nameEl);
     this.setState(prev => {
       return { contacts: prev.contacts.filter(({ id }) => id !== nameEl) };
     });
@@ -26,7 +25,6 @@ export class App extends Component {
       alert(`${name} is alredy in contacts`);
     }
 
-    console.log(name, number);
     this.setState(prev => {
       return {
         contacts: prev.contacts.concat({

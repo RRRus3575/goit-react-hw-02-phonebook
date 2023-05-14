@@ -1,10 +1,9 @@
 import { Component } from 'react';
 import css from './ContactRender.module.css';
+import PropTypes from 'prop-types';
 
 export class ContactRender extends Component {
   handleDelet = e => {
-    console.log(e.target.name);
-
     this.props.onClick(e.target.name);
   };
 
@@ -26,3 +25,8 @@ export class ContactRender extends Component {
       ));
   }
 }
+
+ContactRender.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  search: PropTypes.string.isRequired,
+};
